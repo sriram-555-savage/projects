@@ -1,0 +1,78 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Muli', sans-serif;
+        background-color: beige;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+}
+.head{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 40px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.faq{
+    background-color:beige;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:50vw;
+    margin: 16px;
+    position: relative;
+    overflow: hidden;
+    font-size: x-large;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-weight: bold;
+    padding: 10px;
+}
+.faq.active {
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+
+}
+.faq.active::before,
+.faq.active::after {
+  content: '\f075';
+  font-family: 'Font Awesome 5 Free';
+  color: #2ecc71;
+  font-size: 7rem;
+  position: absolute;
+  opacity: 0.2;
+  top: 20px;
+  left: 20px;
+  z-index: 0;
+}
+
+.faq.active::before {
+  color: #3498db;
+  top: -10px;
+  left: -30px;
+  transform: rotateY(180deg);
+}
+.text {
+  margin: 0 35px 0 0;
+}
+.btn{
+    font-size: larger;
+    border: none;
+margin-right: 15px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: transparent;
+}
+.btn:focus{
+    outline: none;
+}

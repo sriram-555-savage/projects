@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Functions and Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f5f5f5;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 400px;
+      margin-bottom: 40px;
+    }
+    input, button {
+      margin: 8px 0;
+      padding: 8px;
+      width: 95%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 48%;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    p {
+      background: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Part (a) & (b): Functions and Events</h2>
+  <div class="container">
+    <label>Enter a Number:</label><br>
+    <input type="number" id="num" placeholder="Enter number">
+    <br>
+    <button onclick="showFactorial()">Factorial</button>
+    <button onclick="showFibonacci()">Fibonacci</button><br>
+    <button onclick="showPrimes()">Prime Numbers</button>
+    <button onclick="checkPalindrome()">Palindrome</button>
+
+    <p id="result"></p>
+  </div>
+
+  <h2>Part (c): Registration Form Validation</h2>
+  <div class="container">
+    <form onsubmit="return validateForm()">
+      <label>Name:</label>
+      <input type="text" id="name" placeholder="Enter name"><br>
+      
+      <label>Mobile:</label>
+      <input type="text" id="mobile" placeholder="Enter mobile number"><br>
+      
+      <label>Email:</label>
+      <input type="text" id="email" placeholder="Enter email"><br>
+      
+      <button type="submit">Register</button>
+    </form>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    // ---------------- Part (a) Functions ----------------
+
+    function factorial(n) {
+      if (n < 0) return "Not defined for negative numbers";
+      let fact = 1;
+      for (let i = 1; i <= n; i++) fact *= i;
+      return fact;
+    }
+
+    function fibonacci(n) {
+      if (n <= 0) return [];
+      if (n === 1) return [0];
+      let fib = [0, 1];
+      for (let i = 2; i < n; i++) fib.push(fib[i - 1] + fib[i - 2]);
+      return fib;
+    }
+
+    function primesUpTo(n) {
+      let primes = [];
+      for (let i = 2; i <= n; i++) {
+        let isPrime = true;
+        for (let j = 2; j <= Math.sqrt(i); j++) {
+          if (i % j === 0) {
+            isPrime = false;
+            break;
+          }
+        }
+        if (isPrime) primes.push(i);
+      }
+      return primes;
+    }
+
+    function isPalindrome(num) {
+      let str = num.toString();
+      let rev = str.split('').reverse().join('');
+      return str === rev;
+    }
+
+    // ---------------- Part (b) Event Handlers ----------------
+
+    function showFactorial() {
+      let n = parseInt(document.getElementById('num').value);
+      document.getElementById('result').innerText = `Factorial of ${n} = ${factorial(n)}`;
+    }
+
+    function showFibonacci() {
+      let n = parseInt(document.getElementById('num').value);
+      document.getElementById('result').innerText = `Fibonacci series up to ${n}: ${fibonacci(n).join(', ')}`;
+    }
+
+    function showPrimes() {
+      let n = parseInt(document.getElementById('num').value);
+      document.getElementById('result').innerText = `Prime numbers up to ${n}: ${primesUpTo(n).join(', ')}`;
+    }
+
+    function checkPalindrome() {
+      let n = document.getElementById('num').value;
+      let result = isPalindrome(n) ? `${n} is a palindrome.` : `${n} is not a palindrome.`;
+      document.getElementById('result').innerText = result;
+    }
+
+    // ---------------- Part (c) Validation Function ----------------
+
+    function validateForm() {
+      let name = document.getElementById("name").value.trim();
+      let mobile = document.getElementById("mobile").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let msg = document.getElementById("msg");
+
+      const namePattern = /^[A-Za-z][A-Za-z0-9]{5,}$/;  // start with alphabet, min length 6
+      const mobilePattern = /^[0-9]{10}$/;              // exactly 10 digits
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // simple email check
+
+      if (!namePattern.test(name)) {
+        msg.innerText = "Invalid Name! Must start with a letter, be alphanumeric, and ≥ 6 characters.";
+        msg.style.color = "red";
+        return false;
+      }
+      if (!mobilePattern.test(mobile)) {
+        msg.innerText = "Invalid Mobile Number! Must be 10 digits.";
+        msg.style.color = "red";
+        return false;
+      }
+      if (!emailPattern.test(email)) {
+        msg.innerText = "Invalid Email! Must be in format xxxxx@xxxxx.xxx";
+        msg.style.color = "red";
+        return false;
+      }
+
+      msg.innerText = "Registration Successful!";
+      msg.style.color = "green";
+      return false; // prevent form submission for demo
+    }
+  </script>
+</body>
+</html>

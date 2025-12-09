@@ -1,0 +1,46 @@
+.card {
+  width: 220px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;  /* important */
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  margin: 40px;
+}
+
+/* Profile picture */
+.profile-pic {
+  width: 100px;
+  border-radius: 50%;
+}
+
+/* ::before — small PRO badge */
+.card::before {
+  content: "PRO";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background: #ff0055;
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+/* ::after — glow behind the card */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+
+  background: rgba(255, 0, 85, 0.15);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  z-index: -1; /* sends it behind the card */
+}
